@@ -1,0 +1,38 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: aiquizapp
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: AI-quiz-graphql-api
+
+# https://www.serverless.com/plugins/serverless-dotenv-plugin
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  timeout: 30
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+build:
+  #https://www.serverless.com/framework/docs/providers/aws/guide/building#configuration
+  # esbuild is included with serverless now so no need to install separately
+  # not working properly so had to disable
+  # https://github.com/serverless/serverless/blob/ad16b0a8b7cfcb3ac52fecfaa8baf3fb8df00357/lib/plugins/esbuild/index.js#L155
+  # https://github.com/serverless/serverless/issues/12672
+  esbuild:
+    false
+    # configFile: ./buildConfig/esbuild.config.js
+
+functions:
+  graphqlApiHandler:
+    handler: handler.graphqlApiHandler
+    events:
+      - httpApi: "ANY /{proxy+}"
+    environment:
+      GEMINI_API_KEY: ${env:GEMINI_API_KEY}
+
+custom:
+  esbuild:
+    config: ./buildConfig/esbuild.config.js
