@@ -3,6 +3,7 @@ import express from "express";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
+import AuthRoutes from "Routes/authRoutes";
 
 const app = express();
 
@@ -33,6 +34,9 @@ const corsOptions = {
 
 //add cors as browser security
 app.use(cors(corsOptions), express.json());
+
+//adding routes
+app.use("/auth", AuthRoutes);
 
 app.use(
   "/graphql",
