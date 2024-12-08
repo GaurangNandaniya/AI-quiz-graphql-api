@@ -32,6 +32,13 @@ functions:
       - httpApi: "ANY /{proxy+}"
     environment:
       GEMINI_API_KEY: ${env:GEMINI_API_KEY}
+      POSTGRESQL_DB: ${env:POSTGRESQL_DB}
+      POSTGRESQL_DB_HOST: ${env:POSTGRESQL_DB_HOST}
+      POSTGRESQL_DB_PASSWORD: ${env:POSTGRESQL_DB_PASSWORD}
+      POSTGRESQL_DB_USER: ${env:POSTGRESQL_DB_USER}
+      PG_CONNECTION_STRING: ${env:PG_CONNECTION_STRING}
+      SECRET_KEY: ${env:SECRET_KEY}
+      GOOGLE_LOGIN_CLIENT_ID: ${env:GOOGLE_LOGIN_CLIENT_ID}
 
 custom:
   esbuild:
