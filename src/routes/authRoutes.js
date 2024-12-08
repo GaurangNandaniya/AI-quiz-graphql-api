@@ -8,9 +8,10 @@ import {
   getUserByEmail,
   getUserByAuthProvider,
 } from "Controllers/userController";
-import { GOOGLE_LOGIN_CLIENT_ID } from "Constants/google";
 import { GOOGLE } from "Constants/ThirdPartyPlatforms";
 import { validateUser, validateUserEmail } from "Middleware/authMiddleware";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 const client = new OAuth2Client();
@@ -63,7 +64,7 @@ router.post("/thirdPartyAuth", async (req, res) => {
         //https://developers.google.com/identity/sign-in/web/backend-auth#node.js
         const ticket = await client.verifyIdToken({
           idToken: token,
-          audience: GOOGLE_LOGIN_CLIENT_ID,
+          audience: process.env.GOOGLE_LOGIN_CLIENT_ID,
         });
         const payload = ticket.getPayload();
         const email = payload["email"];
@@ -123,7 +124,7 @@ router.post("/login", validateUserEmail, async (req, res) => {
           //https://developers.google.com/identity/sign-in/web/backend-auth#node.js
           const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: GOOGLE_LOGIN_CLIENT_ID,
+            audience: process.env.GOOGLE_LOGIN_CLIENT_ID,
           });
           const payload = ticket.getPayload();
           const providerId = payload["sub"];
