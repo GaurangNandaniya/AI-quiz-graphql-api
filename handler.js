@@ -4,20 +4,11 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import AuthRoutes from "Routes/authRoutes";
+import typeDefs from "GraphqlTypeDefs";
+import resolvers from "GraphqlResolver";
+import { authenticateUser } from "Middleware/authMiddleware";
 
 const app = express();
-
-const typeDefs = `#graphql
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: (...args) => console.log(args) || "world",
-  },
-};
 
 const server = new ApolloServer({
   typeDefs,
@@ -40,7 +31,7 @@ app.use("/auth", AuthRoutes);
 
 app.use(
   "/graphql",
-  // authenticateUser,
+  authenticateUser,
   expressMiddleware(server, {
     context: async ({ req, res }) => {
       return {

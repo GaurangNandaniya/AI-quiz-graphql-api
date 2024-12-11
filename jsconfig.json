@@ -11,7 +11,9 @@
       "Utils/*": ["./src/utils/*"],
       "Constants/*": ["./src/constants/*"],
       "Middleware/*": ["./src/middleware/*"],
-      "Routes/*": ["./src/routes/*"]
+      "Routes/*": ["./src/routes/*"],
+      "GraphqlResolver": ["./src/graphql/resolvers"],
+      "GraphqlTypeDefs": ["./src/graphql/typeDefs"]
     }
   }
 }
