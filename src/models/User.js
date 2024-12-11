@@ -29,6 +29,16 @@ export const fetchUserByEmail = async (data) => {
   return _.first(result);
 };
 
+export const fetchUserById = async (data) => {
+  const { id } = data;
+
+  const result = await db("auth.user as u")
+    .select("*")
+    .where("u.is_deleted", false)
+    .where("u.id", id);
+  return _.first(result);
+};
+
 export const fetchUserByAuthProvider = async (data) => {
   const { authProvider, providerId } = data;
   const query = db
