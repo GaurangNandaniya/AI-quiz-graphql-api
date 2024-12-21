@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-export const difficultyLevelResolvers = {
+export const typeResolvers = {
   User: {
     id: ({ id }) => id,
     firstName: ({ first_name }) => first_name,
