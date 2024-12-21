@@ -1,6 +1,8 @@
 import _ from "lodash";
+import GraphQLJSON from "graphql-type-json";
 
 export const typeResolvers = {
+  JSON: GraphQLJSON,
   User: {
     id: ({ id }) => id,
     firstName: ({ first_name }) => first_name,
@@ -11,7 +13,7 @@ export const typeResolvers = {
     id: ({ id }) => id,
     questionCount: ({ questionCount }) => questionCount,
     title: ({ title }) => title,
-    type: ({ type }) => type,
+    quizType: ({ type }) => type,
     difficultyLevel: ({ difficultyLevel }) => difficultyLevel,
     time: ({ time }) => time,
     questions: ({ questions, questionId }) => {
@@ -25,7 +27,7 @@ export const typeResolvers = {
     id: ({ id }) => id,
     text: ({ text }) => text,
     options: ({ options }) => options,
-    type: ({ type }) => type,
+    questionType: ({ type }) => type,
     answer: ({ answer }) => answer,
   },
 };

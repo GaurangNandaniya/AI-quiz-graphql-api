@@ -1,4 +1,5 @@
 const typeDefs = `#graphql
+scalar JSON
 type User {
   id: ID!
   firstName: String
@@ -10,7 +11,7 @@ type Question {
   id:ID!
   text:String
   options:JSON
-  type:QUESTION_TYPE
+  questionType:QUESTION_TYPE
   answer: JSON
 }
 
@@ -18,7 +19,7 @@ type Quiz {
     id:ID!
     questionCount: Int
     title: String
-    type: QUIZ_TYPE
+    quizType: QUIZ_TYPE
     difficultyLevel: DIFFICULTY_LEVEL_ENUM
     time: JSON
     questions: [Question!]

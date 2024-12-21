@@ -90,7 +90,7 @@ export const generateQuiz = async (data) => {
     type: quizType,
     difficultyLevel: quizDifficultyLevel,
     time: timeForQuiz,
-    questions: _.map(quizQuestions, (question) => ({
+    questions: _.map(quizQuestions.value, (question) => ({
       id: question.id,
       text: question.question_text,
       options: question.options,
