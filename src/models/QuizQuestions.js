@@ -11,11 +11,10 @@ export const addQuizQuestions = async (data) => {
     options: JSON.stringify(question.options) ?? null,
   }));
 
-  const query = db("ai_quiz.questions").insert(questionsData);
-  //   .returning("*");
+  const query = db("ai_quiz.questions").insert(questionsData).returning("*");
 
-  await query;
-  //   const result = await query;
+  //   await query;
+  const result = await query;
 
-  //   return result;
+  return result;
 };
