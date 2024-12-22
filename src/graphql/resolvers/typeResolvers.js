@@ -1,5 +1,6 @@
 import _ from "lodash";
 import GraphQLJSON from "graphql-type-json";
+import { getUserQuizzesById } from "Controllers/userQuizMapController";
 
 export const typeResolvers = {
   JSON: GraphQLJSON,
@@ -8,6 +9,14 @@ export const typeResolvers = {
     firstName: ({ first_name }) => first_name,
     lastName: ({ last_name }) => last_name,
     email: ({ email }) => email,
+    quizzes: async ({ id }, args, { dataLoaders: { batchQuizLoader } }) => {
+      //TODO: check if we need to add dataloader here
+      const quizIds = await getUserQuizzesById({ userId: id });
+
+      const quizzes = await batchQuizLoader.loadMany(_.map(quizIds, "id"));
+
+      return quizzes;
+    },
   },
   Quiz: {
     id: ({ id }) => id,
