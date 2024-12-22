@@ -19,3 +19,23 @@ export const addQuizDetails = async (data) => {
 
   return _.first(result);
 };
+
+export const fetchQuizzesByIds = async (ids) => {
+  console.log("fetchQuizzesByIds", ids);
+
+  const query = db("ai_quiz.quizzes as q")
+    .select(
+      "q.id",
+      "q.questions_count",
+      "q.title",
+      "q.type",
+      "q.difficulty_level",
+      "q.time"
+    )
+    .whereIn("q.id", ids)
+    .where("q.is_deleted", false);
+
+  const result = await query;
+
+  return result;
+};

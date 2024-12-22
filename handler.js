@@ -7,6 +7,7 @@ import AuthRoutes from "Routes/authRoutes";
 import typeDefs from "GraphqlTypeDefs";
 import resolvers from "GraphqlResolver";
 import { authenticateUser } from "Middleware/authMiddleware";
+import { dataLoaders } from "src/graphql/dataLoaders";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(
         expressRequest: req,
         expressResponse: res,
         jwtUser: res.locals.jwtUser,
+        dataLoaders,
       };
     },
   })
