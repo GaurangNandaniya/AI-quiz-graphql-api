@@ -21,8 +21,6 @@ export const addQuizDetails = async (data) => {
 };
 
 export const fetchQuizzesByIds = async (ids) => {
-  console.log("fetchQuizzesByIds", ids);
-
   const query = db("ai_quiz.quizzes as q")
     .select(
       "q.id",

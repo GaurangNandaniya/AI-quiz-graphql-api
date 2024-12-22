@@ -25,16 +25,29 @@ export const typeResolvers = {
     quizType: ({ type }) => type,
     difficultyLevel: ({ difficulty_level }) => difficulty_level,
     time: ({ time }) => time,
-    questions: ({ questions, questionId }) => {
-      if (_.isEmpty(questionId)) {
+    questions: async (
+      { questions, id },
+      args,
+      { dataLoaders: { batchQuestionLoader, batchQuizQuestionIdsLoader } }
+    ) => {
+      if (!_.isEmpty(questions)) {
         return questions;
+      } else {
+        const questionIds = await batchQuizQuestionIdsLoader.load(id);
+
+        if (!_.isEmpty(questionIds)) {
+          const questions = await batchQuestionLoader.loadMany(
+            questionIds.question_ids
+          );
+          return questions;
+        }
+        return null;
       }
-      //TODO: add else case with dataloader to fetch question by ids
     },
   },
   Question: {
     id: ({ id }) => id,
-    text: ({ text }) => text,
+    text: ({ question_text }) => question_text,
     options: ({ options }) => options,
     questionType: ({ type }) => type,
     answer: ({ answer }) => answer,

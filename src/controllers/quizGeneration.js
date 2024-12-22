@@ -86,11 +86,7 @@ export const generateQuiz = async (data) => {
   return {
     ...quizInfo,
     questions: _.map(quizQuestions.value, (question) => ({
-      id: question.id,
-      text: question.question_text,
-      options: question.options,
-      type: question.type,
-      answer: question.answer,
+      ..._.pick(question, ["id", "question_text", "options", "answer"]),
     })),
   };
 };
