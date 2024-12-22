@@ -15,3 +15,16 @@ export const addUserQuizMap = async (data) => {
 
   //   return result;
 };
+
+export const fetchUserQuizzesById = async (data) => {
+  const { userId } = data;
+
+  const query = db("ai_quiz.map_user_quizzes as muq")
+    .select("muq.id")
+    .where("muq.is_deleted", false)
+    .where("muq.fk_user_id", userId);
+
+  const result = await query;
+
+  return result;
+};

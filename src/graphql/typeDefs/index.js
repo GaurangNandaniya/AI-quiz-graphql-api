@@ -1,10 +1,12 @@
 const typeDefs = `#graphql
 scalar JSON
+
 type User {
   id: ID!
   firstName: String
   lastName: String
   email: String
+  quizzes: [Quiz!]
 }
 
 type Question {
@@ -56,7 +58,7 @@ type Query {
 
   }
 
-  type Mutation{
+type Mutation{
     createQuiz(input:CreateQuizInput):Quiz
   }
 
