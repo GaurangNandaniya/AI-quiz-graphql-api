@@ -11,10 +11,10 @@ export const typeResolvers = {
   },
   Quiz: {
     id: ({ id }) => id,
-    questionCount: ({ questionCount }) => questionCount,
+    questionCount: ({ questions_count }) => questions_count,
     title: ({ title }) => title,
     quizType: ({ type }) => type,
-    difficultyLevel: ({ difficultyLevel }) => difficultyLevel,
+    difficultyLevel: ({ difficulty_level }) => difficulty_level,
     time: ({ time }) => time,
     questions: ({ questions, questionId }) => {
       if (_.isEmpty(questionId)) {

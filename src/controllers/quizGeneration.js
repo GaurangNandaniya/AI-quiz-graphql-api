@@ -84,12 +84,7 @@ export const generateQuiz = async (data) => {
   const [, quizQuestions] = await Promise.allSettled(promiseArray);
 
   return {
-    id: quizId,
-    questionCount: numberOfQuestions,
-    title,
-    type: quizType,
-    difficultyLevel: quizDifficultyLevel,
-    time: timeForQuiz,
+    ...quizInfo,
     questions: _.map(quizQuestions.value, (question) => ({
       id: question.id,
       text: question.question_text,
