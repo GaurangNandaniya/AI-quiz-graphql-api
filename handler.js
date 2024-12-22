@@ -37,6 +37,7 @@ app.use(
       return {
         expressRequest: req,
         expressResponse: res,
+        jwtUser: res.locals.jwtUser,
       };
     },
   })
