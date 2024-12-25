@@ -20,8 +20,6 @@ export const addQuizQuestions = async (data) => {
 };
 
 export const fetchQuizQuestionsIdsByQuizIds = async (ids) => {
-  console.log("fetchQuizQuestionsIdsByQuizIds");
-
   const query = db("ai_quiz.questions as q")
     .select(db.raw("json_agg(q.id) as question_ids"), "q.fk_quiz_id as id")
     .whereIn("q.fk_quiz_id", ids)
@@ -33,8 +31,6 @@ export const fetchQuizQuestionsIdsByQuizIds = async (ids) => {
 };
 
 export const fetchQuestionsByIds = async (ids) => {
-  console.log("fetchQuestionsByIds", ids);
-
   const query = db("ai_quiz.questions as q")
     .select("q.id", "q.question_text", "q.options", "q.type", "q.answer")
     .whereIn("q.id", ids);
