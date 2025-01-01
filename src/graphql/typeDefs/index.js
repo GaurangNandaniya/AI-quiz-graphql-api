@@ -37,7 +37,7 @@ enum DIFFICULTY_LEVEL_ENUM {
     EASY
     MEDIUM
     HARD
-    ADVANCE
+    ADVANCED
 }
 
 enum QUIZ_TYPE {
